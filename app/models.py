@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db, login
 from datetime import datetime
 from itsdangerous import URLSafeSerializer
-from flask import app
+from flask import current_app
 
 import jwt
 from time import time
