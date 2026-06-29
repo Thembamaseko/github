@@ -17,7 +17,7 @@ class Config:
     CORS_ORIGINS = os.environ.get('CORS_ORIGINS', '*')
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-      WTF_CSRF_ENABLED = False
+    WTF_CSRF_ENABLED = False
 
     db_url = os.environ.get('DATABASE_URL')
     if db_url and db_url.startswith('postgres://'):
