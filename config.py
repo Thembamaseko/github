@@ -20,8 +20,7 @@ class Config:
     WTF_CSRF_ENABLED = False
 
     db_url = os.environ.get('DATABASE_URL')
-    if db_url and db_url.startswith('postgres://'):
-        db_url = db_url.replace('postgres://', 'postgresql://', 1)
+
     SQLALCHEMY_DATABASE_URI = db_url
 
-    SQLALCHEMY_DATABASE_URI = get_db_url.__func__()
+
