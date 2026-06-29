@@ -17,13 +17,11 @@ class Config:
     CORS_ORIGINS = os.environ.get('CORS_ORIGINS', '*')
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    WTF_CSRF_ENABLED = False
+      WTF_CSRF_ENABLED = False
 
-    @staticmethod
-    def get_db_url():
-        url = os.environ.get('DATABASE_URL', 'sqlite:///' + str(Path(__file__).parent / 'zwipiOnline.db'))
-        if url.startswith('postgres://'):
-            url = url.replace('postgres://', 'postgresql://', 1)
-        return url
+    db_url = os.environ.get('DATABASE_URL')
+    if db_url and db_url.startswith('postgres://'):
+        db_url = db_url.replace('postgres://', 'postgresql://', 1)
+    SQLALCHEMY_DATABASE_URI = db_url
 
     SQLALCHEMY_DATABASE_URI = get_db_url.__func__()
