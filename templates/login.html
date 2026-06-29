@@ -63,14 +63,27 @@
 
     </div>
 
-     {% with messages = get_flashed_messages(with_categories=true)%}
-    {% if messages %}
-    <div class="flash-container">
-        {% for category, message in messages %}
-            <div class="flash flash-{{category}}">{{message}}</div>
-        {% endfor %}
-    </div>
-
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <dialog id="flashDialog">
+            <div class="flash-dialog-inner">
+                <button class="flash-close-btn" onclick="document.getElementById('flashDialog').close()">&#x2715;</button>
+                {% for category, message in messages %}
+                <div class="flash-{{ category }}">
+                    <strong>{{ category|title }}</strong>
+                    <p>{{ message }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </dialog>
+        <script>
+            const flashDialog = document.getElementById('flashDialog');
+            flashDialog.showModal();
+            setTimeout(() => flashDialog.close(), 5000);
+            flashDialog.addEventListener('click', e => {
+                if (e.target === flashDialog) flashDialog.close();
+            });
+        </script>
         {% endif %}
-    {% endwith %}
+        {% endwith %}
 {% endblock %}
